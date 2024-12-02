@@ -37,6 +37,32 @@ plt.xticks(rotation=45)
 plt.legend(title="Meilensteine", fontsize=12)
 plt.grid(True, linestyle="--", alpha=0.6)
 
+
+
+
+# Hervorhebung der Meilensteine, die innerhalb der nächsten 2 Monate abgeschlossen werden sollen
+highlight_dates = df["Bericht"] + pd.DateOffset(months=2)
+
+plt.figure(figsize=(12, 8))
+for ms in ["MS1", "MS2", "MS3", "MS4", "MS5", "MS6"]:
+    # Normale Datenlinie
+    plt.plot(df["Bericht"], df[ms], marker="o", label=ms)
+
+    # Hervorhebungen für MS innerhalb der nächsten 2 Monate
+    future_mask = (df[ms] <= highlight_dates) & (~df[ms].isna())
+    plt.scatter(df["Bericht"][future_mask], df[ms][future_mask], color="red", zorder=5, label=f"{ms} (Highlight)")
+
+# Winkelhalbierende (idealer Verlauf)
+plt.plot(df["Bericht"], df["Bericht"], color="gray", linestyle="--", label="Idealer Verlauf")
+
+# Diagramm beschriften
+plt.title("Meilensteintrendanalyse (mit Hervorhebungen)", fontsize=16)
+plt.xlabel("Berichtsdatum", fontsize=14)
+plt.ylabel("Geplanter Fertigstellungstermin", fontsize=14)
+plt.xticks(rotation=45)
+plt.legend(title="Meilensteine", fontsize=12)
+plt.grid(True, linestyle="--", alpha=0.6)
+
 # Diagramm anzeigen
 plt.tight_layout()
 plt.show()
