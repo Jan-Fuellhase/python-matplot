@@ -5,9 +5,9 @@ url = "https://pastebin.com/api/api_login.php"
 
 # Your credentials
 payload = {
-    "api_dev_key": "inder123",
+    "api_dev_key": "kinder123",
     "api_user_name": "Jan_Boyega",
-    "api_user_password": "inderinder123"
+    "api_user_password": "kinderkinder123"
 }
 
 # Sending POST request
